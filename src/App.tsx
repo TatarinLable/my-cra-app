@@ -1,3 +1,5 @@
+import ConstructionPage from "./pages/ConstructionPage"; // путь к компоненту
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import Nav from "./components/Nav";
 import Hero from "./components/Hero";

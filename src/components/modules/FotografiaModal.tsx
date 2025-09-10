@@ -14,10 +14,8 @@ const ChiSonoModal: React.FC<Props> = ({ onClose }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      {/* Фон */}
       <div className="modal-overlay" onClick={onClose} />
 
-      {/* Попап */}
       <motion.div
         className="modal-card"
         initial={{ scale: 0.8, opacity: 0 }}
@@ -29,6 +27,15 @@ const ChiSonoModal: React.FC<Props> = ({ onClose }) => {
           <div className="modal-emoji">😊</div>
           <h2 className="modal-title">Работаем над этим проектом</h2>
           <p className="modal-text">Скоро увидите! Приносим извинения за ожидание.</p>
+
+          {/* Контейнер с пиксельными человечками */}
+          <div className="construction-area">
+            <div className="worker worker-1"></div>
+            <div className="worker worker-2"></div>
+            <div className="block block-1"></div>
+            <div className="block block-2"></div>
+          </div>
+
           <button className="close-btn" onClick={onClose}>Закрыть</button>
         </div>
       </motion.div>

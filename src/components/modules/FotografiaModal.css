@@ -1,3 +1,4 @@
+/* Основные стили модального окна */
 .modal-root {
   position: fixed;
   inset: 0;
@@ -60,4 +61,76 @@
 
 .close-btn:hover {
   background-color: #0056b3;
+}
+
+/* Контейнер для анимации строительства */
+.construction-area {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  margin-top: 20px;
+  background: #e0e0e0;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 2px dashed #bbb;
+}
+
+/* Пиксельные человечки */
+.worker {
+  width: 20px;
+  height: 20px;
+  background: #ff5722;
+  position: absolute;
+  bottom: 10px;
+  border: 2px solid #000;
+  border-radius: 3px;
+  animation: walk 4s linear infinite;
+}
+
+.worker-2 {
+  animation-delay: 1s;
+}
+
+.worker-3 {
+  animation-delay: 2s;
+}
+
+/* Строительные блоки */
+.block {
+  width: 40px;
+  height: 20px;
+  background: #2196f3;
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  transform: translateX(0) rotate(0deg);
+  opacity: 0;
+  animation: build 4s linear infinite;
+}
+
+.block-2 {
+  left: 50%;
+  animation-delay: 1s;
+}
+
+.block-3 {
+  left: 80%;
+  animation-delay: 2s;
+}
+
+/* Анимация движения человечка */
+@keyframes walk {
+  0% { left: 10px; bottom: 10px; }
+  25% { left: 50px; bottom: 50px; }
+  50% { left: 150px; bottom: 50px; }
+  75% { left: 200px; bottom: 80px; }
+  100% { left: 10px; bottom: 10px; }
+}
+
+/* Анимация блока: подъём и установка */
+@keyframes build {
+  0% { opacity: 0; bottom: 0; transform: rotate(0deg); }
+  40% { opacity: 1; bottom: 50px; transform: rotate(-15deg); }
+  60% { bottom: 50px; transform: rotate(0deg); }
+  100% { opacity: 1; bottom: 0; transform: rotate(0deg); }
 }
