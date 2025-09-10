@@ -1,0 +1,162 @@
+.sections-slider {
+  min-height: 100vh;
+  position: relative;
+  padding: 48px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: linear-gradient(to top, rgba(0,0,0,0.3), transparent);
+  overflow: hidden;
+}
+
+/* Controls над слайдами */
+.slider-controls.lower-center {
+  position: absolute;
+  top: 180px;
+  left: calc(50% - 410px); /* фиксируем левее на 300px + 250 для стрелок */
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 10;
+  font-size: 20px;
+}
+
+.controls-group {
+  display: flex;
+  gap: 16px;
+}
+
+.nav-pill {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.nav-pill:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.nav-pill:hover:not(:disabled) {
+  background: rgba(255,255,255,0.3);
+}
+
+.current-section {
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 0.12em;
+  color: white;
+}
+
+/* Карусель */
+.carousel-wrapper {
+  overflow: visible; /* вместо hidden */
+  width: 100%;
+  position: relative;
+  margin-top: 220px; 
+}
+
+.carousel-track {
+  display: flex;
+  gap: 24px;
+  justify-content: flex-start;
+  padding-left: calc(50% - 180px - 300px); /* фиксируем активный слайд на месте */
+}
+
+.carousel-slide {
+  flex: 0 0 360px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.5s, opacity 0.5s;
+  opacity: 0.7;
+  transform: scale(0.9);
+}
+
+.carousel-slide img {
+  pointer-events: none; /* чтобы drag работал только на треке */
+  user-select: none; /* запрещает выделение текста */
+}
+
+.carousel-slide.active {
+  opacity: 1;
+  transform: scale(1);
+  position: relative; /* фиксированный активный слайд */
+  left: 0;
+
+}
+
+/* изображение внутри активного слайда */
+.carousel-slide.active .section-image {
+  width: 100%;
+  height: 240px; 
+  border: 2px solid white; /* тонкая рамка */
+  border-radius: 16px;      /* закругление */
+  object-fit: cover;
+  box-sizing: border-box;   /* чтобы рамка не “выпирала” за пределы изображения */
+}
+/* Слайды */
+.section-image {
+  width: 100%;
+  height: 240px; 
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.4);
+  margin-bottom: 12px; /* описание ближе к картинке */
+}
+
+/* Убираем заголовок */
+.section-title {
+  display: none;
+}
+
+.section-content {
+  font-size: 16px;
+  line-height: 1.4;
+  opacity: 0.9;
+  color: white;
+  margin-bottom: 16px;
+  text-align: center; /* по центру */
+}
+
+/* Фиксированная кнопка APRI PAGINA */
+.fixed-apri {
+  position: absolute;
+  bottom: -70px;
+  left: calc(50% - 300px);
+  font-size: 14px; /* текст меньше */
+  padding: 18px 42px; /* оставляем старый размер кнопки */
+  z-index: 20;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.fixed-apri:hover {
+  transform: scale(1.05);
+  background: #fff;
+}
+/* Соцсети */
+.social-icons {
+  position: fixed;
+  bottom: 32px;
+  right: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  z-index: 50;
+}
+
+.social-icons a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+.social-icons a:hover {
+  opacity: 1;
+}

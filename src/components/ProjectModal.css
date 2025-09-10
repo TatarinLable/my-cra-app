@@ -1,0 +1,85 @@
+.modal-root {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  display: flex;
+  align-items: flex-start; /* чтобы модалка была сверху */
+  justify-content: center;
+  background: #000; /* фон вокруг модалки */
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: transparent; /* можно оставить прозрачным, т.к. фон уже черный */
+}
+
+.modal-card {
+  position: relative;
+  top: 5px;
+  width: calc(100% - 10px);  /* 10px слева + 10px справа */
+  height: calc(100% - 5px); /* отступ сверху 10px, до низа экрана */
+  border-radius: 20px;
+  overflow: auto;
+  background: #000; /* фон самой модалки */
+  z-index: 9999;
+  padding: 24px;
+
+  /* скрываем скроллбар */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE, Edge */
+}
+
+.modal-card::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+.modal-close {
+  position: absolute;
+  right: 18px;
+  top: 12px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.modal-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 50px;
+  object-fit: cover;
+}
+
+.modal-body h3 {
+  font-size: 28px;
+  letter-spacing: 0.12em;
+}
+
+.modal-body p {
+  opacity: 0.9;
+  line-height: 1.5;
+  margin-top: 8px;
+}
+
+.modal-body .btn-pill {
+  margin-top: 16px;
+  padding: 14px 32px;
+  border-radius: 999px;
+  border: none;
+  background: white;
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.modal-body .btn-pill:hover {
+  transform: scale(1.05);
+}

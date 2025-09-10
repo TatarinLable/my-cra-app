@@ -1,0 +1,180 @@
+/* Hero Section */
+.hero-section {
+  width: 100vw;
+  height: 100vh; /* полный экран */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 64px 80px;
+  position: relative;
+  color: var(--white);
+  backdrop-filter: blur(2px);
+  font-family: 'Inter', sans-serif;
+  overflow: hidden; /* убираем скролл */
+}
+
+/* Hero Left Content */
+.hero-left {
+  max-width: 1100px;
+}
+
+/* Topbar */
+.hero-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.logo {
+  font-weight: 900;
+  font-size: 20px;
+  background: transparent;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: default;
+}
+
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.lang-pill {
+  display: flex;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 6px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* Hero Content */
+.hero-tag {
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.hero-name {
+  font-size: 60px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  line-height: 1.1;
+}
+
+.hero-content .lead {
+  max-width: 600px;
+  margin-top: 12px;
+  margin-bottom: 28px;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.5;
+}
+
+/* Buttons */
+.hero-actions {
+  display: flex;
+  gap: 18px;
+}
+
+.btn-pill {
+  background: white;
+  color: #000;
+  border-radius: 999px;
+  padding: 14px 28px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.btn-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+}
+
+.btn-pill.ghost {
+  background: rgba(255, 255, 255, 0.06);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.btn-pill.ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Bottom Indicator */
+.hero-bottom-indicator {
+  position: absolute;
+  left: 80px;
+  bottom: 28px;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 28px;
+  font-weight: 900;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: translateY(0); opacity: 0.3; }
+  50% { transform: translateY(10px); opacity: 0.6; }
+}
+
+/* Developer кнопка */
+.developer-btn {
+  display: inline-block;
+  background: white;
+  color: #000;
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-weight: 400;
+  font-size: 12px;
+  cursor: default;
+  user-select: none;
+  margin-bottom: 12px;
+  margin-top: 50px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .hero-section {
+    padding: 48px 40px;
+  }
+
+  .hero-name {
+    font-size: 48px;
+  }
+
+  .hero-content .lead {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 32px 24px;
+  }
+
+  .hero-name {
+    font-size: 36px;
+  }
+
+  .btn-pill {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+}
+
+/* --- Новый код для скрытия скролла на body --- */
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* скрываем скролл */
+}
+
+/* Можно добавить плавный переход к следующему экрану при скролле */
