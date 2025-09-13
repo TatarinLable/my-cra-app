@@ -5,10 +5,10 @@
   align-items: center;
   padding: 24px 80px;
   position: absolute;
-  top: 30px; /* опускаем навигацию вниз */
+  top: 30px;
   left: 0;
   z-index: 10;
-  font-family: 'Comfortaa', cursive; /* для согласованного шрифта */
+  font-family: 'Comfortaa', cursive;
 }
 
 /* Левый блок */
@@ -37,15 +37,15 @@
   color: white;
 }
 
-/* Кнопка "назад" — больше */
+/* Кнопка "назад" */
 .back-btn {
   background: rgba(255, 255, 255, 0.05);
   border: none;
   border-radius: 30px;
-  padding: 12px 24px; /* увеличили */
+  padding: 12px 24px;
   color: white;
   font-weight: 600;
-  font-size: 16px; /* чуть больше */
+  font-size: 16px;
   cursor: pointer;
   font-family: 'Comfortaa', cursive;
   transition: all 0.3s ease, transform 0.2s ease;
@@ -58,22 +58,21 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
-/* Сдвигаем меню табов ближе к кнопке назад */
+/* Центр */
 .nav-center {
   display: flex;
-  gap: 16px; /* расстояние между самими табами */
-  margin-left: -150px; /* сдвигаем левее, ближе к кнопке */
+  gap: 16px;
+  margin-left: -150px;
 }
 
-/* Таб-ссылки — чуть меньше текст */
 .nav-link {
   background: none;
   border: none;
   border-radius: 30px;
-  padding: 12px 24px; /* увеличиваем, как у кнопки torna */
+  padding: 12px 24px;
   color: white;
-  font-weight: 500; /* Medium */
-  font-size: 14px; /* оставляем прежний размер текста */
+  font-weight: 500;
+  font-size: 14px;
   cursor: pointer;
   font-family: 'Comfortaa', cursive;
   transition: all 0.3s ease, transform 0.2s ease;
@@ -92,9 +91,7 @@
   box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
 }
 
-
-
-/* Правый блок: язык */
+/* Правый блок */
 .nav-right .lang-pill {
   display: flex;
   gap: 8px;
@@ -103,6 +100,31 @@
   border-radius: 999px;
   cursor: pointer;
   font-weight: 600;
+}
+
+/* Джойстик языка */
+.lang-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f5f5f5;
+  margin-left: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+  cursor: pointer;
+  transition: transform 0.1s ease-out, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  perspective: 600px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+/* Убираем золотую подсветку */
+.lang-circle::before {
+  content: none;
 }
 
 /* Адаптив */
@@ -129,41 +151,4 @@
     padding: 4px 10px;
     font-size: 12px;
   }
-}
-
-.lang-circle {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #f5f5f5; /* корпус */
-  margin-left: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
-  font-weight: bold;
-  color: #000;
-  cursor: pointer;
-  transition: transform 0.1s ease-out, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-  perspective: 600px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  position: relative;
-}
-
-/* Золотая подсветка */
-.lang-circle::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5),
-              0 0 20px rgba(255, 215, 0, 0.3),
-              0 0 30px rgba(255, 215, 0, 0.2);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.lang-toggle:hover .lang-circle::before {
-  opacity: 1; /* подсветка появляется при наведении на область */
 }

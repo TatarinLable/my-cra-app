@@ -19,32 +19,28 @@ const Nav: React.FC<Props> = ({ mode, setMode, sections, currentSection, setCurr
     if (!joy) return
 
     const rect = joy.getBoundingClientRect()
-    const centerX = rect.left + rect.width / 2
-    const centerY = rect.top + rect.height / 2
+    const joyX = rect.left + rect.width / 2
+    const joyY = rect.top + rect.height / 2
 
-    // вычисляем смещение относительно центра
-    const deltaX = e.clientX - centerX
-    const deltaY = e.clientY - centerY
+    const deltaX = e.clientX - joyX
+    const deltaY = e.clientY - joyY
 
-    const maxOffset = 10 // максимальное смещение
-    const offsetX = Math.max(Math.min(deltaX, maxOffset), -maxOffset)
-    const offsetY = Math.max(Math.min(deltaY, maxOffset), -maxOffset)
+    const maxTilt = 25 // угол отклонения
+    const rotateX = Math.max(Math.min(deltaY / 5, maxTilt), -maxTilt)
+    const rotateY = Math.max(Math.min(-deltaX / 5, maxTilt), -maxTilt)
 
-    const maxRotate = 15 // максимальный угол наклона
-    const rotateX = (offsetY / maxOffset) * maxRotate
-    const rotateY = (-offsetX / maxOffset) * maxRotate
-
-    joy.style.transform = `translate(${offsetX}px, ${offsetY}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`
+    joy.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`
   }
 
   const handleMouseLeave = () => {
     const joy = joyRef.current
     if (!joy) return
-    joy.style.transform = "translate(0px, 0px) rotateX(0deg) rotateY(0deg)"
+    joy.style.transform = "rotateX(0deg) rotateY(0deg)"
   }
 
   return (
     <nav className={`app-nav`}>
+      {/* Левый блок */}
       <div className="nav-left">
         {mode === "hero" ? (
           <>
@@ -58,6 +54,7 @@ const Nav: React.FC<Props> = ({ mode, setMode, sections, currentSection, setCurr
         )}
       </div>
 
+      {/* Центр: только для Slider */}
       {mode === "slider" && (
         <div className="nav-center">
           {sections.map((s, i) => (
@@ -72,17 +69,19 @@ const Nav: React.FC<Props> = ({ mode, setMode, sections, currentSection, setCurr
         </div>
       )}
 
+      {/* Правый блок: переключатель языка + джойстик */}
       <div className="nav-right">
-        <div
-          className="lang-toggle"
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
-        >
+        <div className="lang-toggle">
           <div className="lang-pill">
             <span className="inner">IT</span>
             <span>EN</span>
           </div>
-          <div className="lang-circle" ref={joyRef}>
+          <div
+            className="lang-circle"
+            ref={joyRef}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+          >
             ×
           </div>
         </div>

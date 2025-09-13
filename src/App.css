@@ -1,6 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap&subset=cyrillic');
 .App {
   text-align: center;
-  font-family: 'Comfortaa', cursive; /* Применяем Comfortaa для компонента App */
 }
 
 .App-logo {
@@ -23,7 +23,6 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  font-family: 'Comfortaa', cursive; /* Убеждаемся, что Comfortaa применяется здесь */
 }
 
 .App-link {

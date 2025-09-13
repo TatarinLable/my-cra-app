@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Project } from "../types";
-import { motion, PanInfo } from "framer-motion";
+import { motion, AnimatePresence, PanInfo } from "framer-motion";
 import "./SectionsSlider.css";
 
 type Section = { id: string; title: string; type: "projects"; projects: Project[] };
@@ -23,10 +23,8 @@ const SectionsSlider: React.FC<Props> = ({ sections, current, setCurrent, onOpen
     const velocity = info.velocity.x;
 
     if (offset < -50 || velocity < -200) {
-      // Свайп влево → следующий слайд
       onNext();
     } else if (offset > 50 || velocity > 200) {
-      // Свайп вправо → предыдущий слайд
       onPrev();
     }
   };
@@ -56,13 +54,30 @@ const SectionsSlider: React.FC<Props> = ({ sections, current, setCurrent, onOpen
           {sections.map((sec, index) => {
             const project = sec.projects[0];
             const isActive = index === current;
+
             return (
               <div
                 key={sec.id}
                 className={`carousel-slide ${isActive ? "active" : ""}`}
               >
                 <img src={project.image} alt={project.title} className="section-image" />
-                <h2 className="section-title">{project.title}</h2>
+
+                {/* Анимированный заголовок */}
+                <AnimatePresence mode="wait">
+                  {isActive && (
+                    <motion.h2
+                      key={project.title}
+                      className="section-title"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      {project.title}
+                    </motion.h2>
+                  )}
+                </AnimatePresence>
+
                 <p className="section-content">{project.description}</p>
               </div>
             );

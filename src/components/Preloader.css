@@ -1,0 +1,47 @@
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent; /* фон прозрачный, только маски закрывают */
+  transition: opacity 0.6s ease;
+}
+
+.preloader--hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Маски */
+.mask {
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  background: black;
+  animation-fill-mode: forwards;
+}
+
+/* Верхняя уходит вверх */
+.mask.top {
+  top: 0;
+  animation: slideTop 2.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+/* Нижняя уходит вниз */
+.mask.bottom {
+  bottom: 0;
+  animation: slideBottom 2.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+@keyframes slideTop {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+
+@keyframes slideBottom {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100%); }
+}

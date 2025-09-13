@@ -14,6 +14,9 @@ import FotografiaModal from "./components/modules/FotografiaModal";
 import CodingModal from "./components/modules/CodingModal";
 import PortfolioModal from "./components/modules/PortfolioModal";
 
+// Прелоадер
+import Preloader from "./components/Preloader";
+
 // Данные проектов
 const aboutProjects: Project[] = [
   { id: 0, title: "Chi Sono", image: "/assets/about-thumb.jpg", description: "Ciao! Sono Federico Menegoi." },
@@ -40,9 +43,18 @@ const SECTIONS = [
 ];
 
 const App: React.FC = () => {
+  const [loading, setLoading] = useState<boolean>(true);
   const [mode, setMode] = useState<"hero" | "slider">("hero");
   const [currentSection, setCurrentSection] = useState(0);
   const [openModule, setOpenModule] = useState<string | null>(null);
+
+  // Прелоадер скрываем через 3 секунды
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Клавиши Enter / Escape
   useEffect(() => {
@@ -71,67 +83,72 @@ const App: React.FC = () => {
     }
   };
 
-  // Функция перехода на Slider
   const handleNextScreen = () => setMode("slider");
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        position: "relative",
-        backgroundImage: `url(${bg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        overflow: "hidden",
-      }}
-    >
-      <OrientationWarning />
-      <Nav
-        mode={mode}
-        setMode={setMode}
-        sections={SECTIONS}
-        currentSection={currentSection}
-        setCurrentSection={setCurrentSection}
-      />
+    <>
+      {/* Прелоадер всегда сверху */}
+      {loading && <Preloader onFinish={() => setLoading(false)} />}
 
-      <AnimatePresence mode="wait">
-        {mode === "hero" && (
-          <motion.div
-            key="hero-screen"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ y: "-100%", opacity: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <Hero onEnter={() => setMode("slider")} onNextScreen={handleNextScreen} />
-          </motion.div>
-        )}
+      {/* Основной сайт */}
+      <div
+        style={{
+          minHeight: "100vh",
+          position: "relative",
+          backgroundImage: `url(${bg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          overflow: "hidden",
+        }}
+      >
+        <OrientationWarning />
+        <Nav
+          mode={mode}
+          setMode={setMode}
+          sections={SECTIONS}
+          currentSection={currentSection}
+          setCurrentSection={setCurrentSection}
+        />
 
-        {mode === "slider" && (
-          <motion.div
-            key="slider-screen"
-            initial={{ y: "100%", opacity: 0 }}
-            animate={{ y: "0%", opacity: 1 }}
-            exit={{ y: "-100%", opacity: 0 }}
-            transition={{ type: "spring", stiffness: 200, damping: 18, mass: 0.6 }}
-          >
-            <SectionsSlider
-              sections={SECTIONS}
-              current={currentSection}
-              setCurrent={setCurrentSection}
-              onOpenProject={(p: Project) => handleOpenModule(p.title)}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
+        <AnimatePresence mode="wait">
+          {mode === "hero" && (
+            <motion.div
+              key="hero-screen"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ y: "-100%", opacity: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <Hero onEnter={() => setMode("slider")} onNextScreen={handleNextScreen} />
+            </motion.div>
+          )}
 
-      {/* Модалки */}
-      {openModule === "chiSono" && <ChiSonoModal onClose={() => setOpenModule(null)} />}
-      {openModule === "grafica" && <GraficaModal onClose={() => setOpenModule(null)} />}
-      {openModule === "fotografia" && <FotografiaModal onClose={() => setOpenModule(null)} />}
-      {openModule === "coding" && <CodingModal onClose={() => setOpenModule(null)} />}
-      {openModule === "portfolio" && <PortfolioModal onClose={() => setOpenModule(null)} />}
-    </div>
+          {mode === "slider" && (
+            <motion.div
+              key="slider-screen"
+              initial={{ y: "100%", opacity: 0 }}
+              animate={{ y: "0%", opacity: 1 }}
+              exit={{ y: "-100%", opacity: 0 }}
+              transition={{ type: "spring", stiffness: 200, damping: 18, mass: 0.6 }}
+            >
+              <SectionsSlider
+                sections={SECTIONS}
+                current={currentSection}
+                setCurrent={setCurrentSection}
+                onOpenProject={(p: Project) => handleOpenModule(p.title)}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Модалки */}
+        {openModule === "chiSono" && <ChiSonoModal onClose={() => setOpenModule(null)} />}
+        {openModule === "grafica" && <GraficaModal onClose={() => setOpenModule(null)} />}
+        {openModule === "fotografia" && <FotografiaModal onClose={() => setOpenModule(null)} />}
+        {openModule === "coding" && <CodingModal onClose={() => setOpenModule(null)} />}
+        {openModule === "portfolio" && <PortfolioModal onClose={() => setOpenModule(null)} />}
+      </div>
+    </>
   );
 };
 
